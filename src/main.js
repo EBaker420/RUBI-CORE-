@@ -15,7 +15,7 @@ async function callHost(){
 }
 function render(){
  app.innerHTML=`<main><section><p class="eyebrow">CONTROLLED INGRESS</p><h1>RUBI Core</h1><p id="state">Authenticate once. RUBI will run the ingress proof automatically after the secure link returns.</p><form id="login"><input id="email" type="email" autocomplete="email" placeholder="Email address" required><button>Send secure sign-in link</button></form><pre id="result"></pre></section></main>`
- document.querySelector('#login').onsubmit=async e=>{e.preventDefault();status('Sending secure sign-in link…');const email=document.querySelector('#email').value;const {error}=await supabase.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin}});status(error?error.message:'Secure link sent. Open it on this device; RUBI will continue automatically.')}
+ document.querySelector('#login').onsubmit=async e=>{e.preventDefault();status('Sending secure sign-in link…');const email=document.querySelector('#email').value;const {error}=await supabase.auth.signInWithOtp({email,options:{emailRedirectTo:'https://rubi-core.onrender.com'}});status(error?error.message:'Secure link sent. Open it on this device; RUBI will continue automatically.')}
 }
 render()
 const {data}=await supabase.auth.getSession()
